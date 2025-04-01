@@ -85,7 +85,7 @@ scikit-learn, pandas, seaborn, matplotlib
 ```
 .
 ├── data/                   # Raw and processed datasets (not uploaded)
-├── notebooks/              # EDA and tuning notebooks
+├── notebooks/              # Code
 └── README.md               # Project overview
 ```
 
