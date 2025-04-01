@@ -1,6 +1,6 @@
 ## 🚗 Car Insurance Claim Prediction with XGBoost
 
-This project builds an end-to-end machine learning pipeline to predict car insurance claims using domain-specific features from driver demographics, vehicle details, region-based risk indicators, and behavioral patterns.
+This project builds an machine learning model to predict car insurance claims using domain-specific features from driver demographics, vehicle details, region-based risk indicators, and behavioral patterns.
 
 ### 🌟 Objective
 
