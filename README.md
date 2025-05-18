@@ -1,4 +1,4 @@
-## 🚗 Car Insurance Claim Prediction with XGBoost
+# 🚗 Car Insurance Claim Prediction with XGBoost
 
 This project develops an XGBoost-based predictive model to identify high-risk drivers who are likely to file car insurance claims. The model leverages domain-specific features from driver demographics, vehicle details, regional conditions, and driving behavior.
 
