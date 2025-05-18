@@ -190,9 +190,16 @@ Model performance across validation folds:
 
 ![ROC Curve](image/roc.png)
 
-
    
-3. 
+**3. 📌 Business Interpretation**
+
+By stratifying drivers based on predicted risk scores:
+
+- Optimal threshold (KS=0.64) achieved recall of 65% for High-risk segment.
+
+- This allows insurers to take proactive measures such as adjusting premiums, requiring additional documentation, or offering driving behavior incentives.
+
+---
 
 ### 📦 Tech Stack
 
