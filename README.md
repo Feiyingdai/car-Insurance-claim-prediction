@@ -184,6 +184,11 @@ ps_calc_* : Acceleration/braking aggressiveness, high mileage behavior...
 **KS Score (avg):** 0.64  
 **Recall at KS Threshold (avg):** 0.65
 
+**2. 📈 ROC Curve**
+
+Model performance across validation folds:
+
+![ROC Curve](image/ROC-Curve.png)
 
 
    
