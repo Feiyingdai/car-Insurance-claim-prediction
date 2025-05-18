@@ -188,7 +188,7 @@ ps_calc_* : Acceleration/braking aggressiveness, high mileage behavior...
 
 Model performance across validation folds:
 
-![ROC Curve](image/ROC-Curve.png)
+![ROC Curve](image/roc.png)
 
 
    
