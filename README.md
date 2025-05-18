@@ -82,62 +82,62 @@ df.head()
 
 ### 🧩 Feature Groups
 
-1. Individual Info
+**Individual Info**
 
-ps_ind_* : Age group, license type, profession, training participation
+ps_ind_* : Age group, license type, profession, training participation...
 
-2. Car Features
+**Car Features**
 
-ps_car_* : Vehicle type, battery health, charging data, Autopilot
+ps_car_* : Vehicle type, battery health, charging data, Autopilot...
 
-3. Region Features
+**Region Features**
 
-ps_reg_* : Climate, traffic, charger density
+ps_reg_* : Climate, traffic, charger density...
 
-4. Driving Behavior
+**Driving Behavior**
 
-ps_calc_* : Acceleration/braking aggressiveness, high mileage behavior
+ps_calc_* : Acceleration/braking aggressiveness, high mileage behavior...
 
 ---
 
 ### 📦 Project Phases & To-Do List
-✅ Phase 1: Data Preparation & Cleaning
+#### ✅ Phase 1: Data Preparation & Cleaning
 
-Balance target class using techniques like Borderline SMOTE
+- Balance target class using techniques like Borderline SMOTE
 
-Handle missing values and outliers
+- Handle missing values and outliers
 
-Transform skewed variables if needed
+- Transform skewed variables if needed
 
-✅ Phase 2: Feature Engineering
+#### ✅ Phase 2: Feature Engineering
 
-Smoothed target encoding with noise
+- Smoothed target encoding with noise
 
-Polynomial and interaction features
+- Polynomial and interaction features
 
-Gain/weight-based feature selection
+- Gain/weight-based feature selection
 
-✅ Phase 3: Model Development & Tuning
+#### ✅ Phase 3: Model Development & Tuning
 
-Model: XGBoost (with L1/L2 regularization)
+- Model: XGBoost (with L1/L2 regularization)
 
-Nested Optuna tuning (XGBoost hyperparameters & target encoding hyperparameters)
+- Nested Optuna tuning (XGBoost hyperparameters & target encoding hyperparameters)
 
-10-fold stratified cross-validation
+- 10-fold stratified cross-validation
 
-✅ Phase 4: Interpretation & Risk Stratification
+#### ✅ Phase 4: Interpretation & Risk Stratification
 
-AUC Score, ROC Curve
+- AUC Score, ROC Curve
 
-KS Score and Probability thresholds for claim risk segmentation of validation dataset
+- KS Score and Probability thresholds for claim risk segmentation of validation dataset
 
-Recall of validation dataset
+- Recall of validation dataset
 
-SHAP Feature Importance
+- SHAP Feature Importance
 
-✅ Phase 5: Prediction of Test Dataset
+#### ✅ Phase 5: Prediction of Test Dataset
 
-Final test set prediction is averaged over 10 models (from CV folds)
+- Final test set prediction is averaged over 10 models (from CV folds)
 
 ---
 
@@ -162,6 +162,32 @@ Final test set prediction is averaged over 10 models (from CV folds)
 | KS Score                   | 0.64       |
 
 ---
+
+### Model Evaluation & Business Interpretation
+
+**1. 📈 Cross-Validation Results (10 Folds)**
+
+| Fold | AUC   |
+|------|-------|
+| 1    | 0.8651 |
+| 2    | 0.8652 |
+| 3    | 0.8659|
+| 4    | 0.8685 |
+| 5    | 0.8767|
+| 6    | 0.8669 |
+| 7    | 0.8670|
+| 8    | 0.8669 |
+| 9    | 0.8619 |
+| 10   | 0.8638 |
+| **Avg** | **0.8666** |
+
+**KS Score (avg):** 0.64  
+**Recall at KS Threshold (avg):** 0.65
+
+
+
+   
+3. 
 
 ### 📦 Tech Stack
 
@@ -193,3 +219,16 @@ Libraries: pandas, scikit-learn, seaborn, matplotlib
 Dataset not uploaded due to privacy constraints.
 
 A small sample dataset **sample_data.csv** is available in data/ folder for reproducibility.
+
+---
+
+### 📄 License & Contribution
+
+**📝 License**
+
+MIT License
+
+**👥 Contributors**
+
+This project was developed by Feiying Dai, as part of my personal portfolio to demonstrate risk modeling in real-world insurance applications.
+
