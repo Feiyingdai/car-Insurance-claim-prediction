@@ -2,6 +2,8 @@
 
 This project develops an XGBoost-based predictive model to identify high-risk drivers who are likely to file car insurance claims. The model leverages domain-specific features from driver demographics, vehicle details, regional conditions, and driving behavior.
 
+---
+
 ### 🌟 Project Overview
 
 #### Objective:
@@ -19,6 +21,7 @@ Define acceptance thresholds or policy conditions based on risk profiles
 🚘 Proactive Behavioral Interventions
 Identify high-risk drivers early and offer training, incentives, or personalized feedback to reduce claim likelihood
 
+---
 
 ### 📊 Dataset Overview
 
@@ -27,6 +30,55 @@ Training set: 590,000+ rows
 Test set: 890,000+ rows
 
 Target variable: target (1 = made a claim, 0 = no claim)
+
+---
+
+### 🚀 Quick Start
+
+To get started quickly, follow these steps:
+
+
+#### 1. Clone the repository
+
+```bash
+git clone https://github.com/Feiyingdai/Car-Insurance-Claim-Prediction.git
+cd Car-Insurance-Claim-Prediction
+```
+
+
+#### 2. Install required packages
+
+```bash
+pip install -r requirements.txt
+```
+
+Or install manually:
+
+```bash
+pip install pandas numpy scikit-learn xgboost optuna shap matplotlib seaborn
+```
+
+#### 3. Run the notebook
+
+Open the notebook using Jupyter or Colab:
+
+```bash
+jupyter notebook car_insurance_claim_prediction.ipynb
+```
+
+
+#### 4. Use the sample dataset
+
+A small sample dataset `sample_data.csv` (100 rows) is included in the `data/` folder for testing and quick experimentation.
+
+```python
+# Load sample data
+import pandas as pd
+df = pd.read_csv('data/sample_data.csv')
+df.head()
+```
+---
+
 
 ### 🧩 Feature Groups
 
@@ -46,67 +98,98 @@ ps_reg_* : Climate, traffic, charger density
 
 ps_calc_* : Acceleration/braking aggressiveness, high mileage behavior
 
-### 🧠 Model Architecture
+---
 
-✅ Model: XGBoost
+### 📦 Project Phases & To-Do List
+✅ Phase 1: Data Preparation & Cleaning
 
-✅ Data Clean:
+Balance target class using techniques like Borderline SMOTE
 
-Data Imbalance
+Handle missing values and outliers
 
-Outlier and missing value handling
+Transform skewed variables if needed
 
-✅ Feature Engineering:
+✅ Phase 2: Feature Engineering
 
-Target Encoding with smoothed priors + noise
+Smoothed target encoding with noise
 
-Polynomial feature interactions
+Polynomial and interaction features
 
 Gain/weight-based feature selection
 
-✅ Tuning:
+✅ Phase 3: Model Development & Tuning
 
-Hyperparameter tuning via Optuna
+Model: XGBoost (with L1/L2 regularization)
 
-Target encoding parameter tuning via nested Optuna
+Nested Optuna tuning (XGBoost hyperparameters & target encoding hyperparameters)
 
-5-fold Stratified Cross-Validation
+10-fold stratified cross-validation
 
-✅ Final Performance:
+✅ Phase 4: Interpretation & Risk Stratification
 
-AUC: 0.73
+AUC Score, ROC Curve
 
-Identified ~65% of high-risk drivers
+KS Score and Probability thresholds for claim risk segmentation of validation dataset
+
+Recall of validation dataset
+
+SHAP Feature Importance
+
+✅ Phase 5: Prediction of Test Dataset
+
+Final test set prediction is averaged over 10 models (from CV folds)
+
+---
+
+### 🌟 Final Deliverables
+
+| Deliverable        | Description                                           |
+|--------------------|-------------------------------------------------------|
+| Trained Model      | XGBoost model with tuned hyperparameters             |
+| Feature Set        | Finalized engineered feature matrix                  |
+| Evaluation         | AUC Score, ROC Curve, KS score, Recall              |
+| Prediction         | Out-of-sample prediction on test dataset             |
+
+
+---
+
+### 📊 Results Summary
+
+| Metric                     | Result     |
+|----------------------------|------------|
+| AUC                        | 0.86       |
+| High-Risk Driver Recall    | 65%        |
+| KS Score                   | 0.64       |
+
+---
 
 ### 📦 Tech Stack
 
-Python 3.10+
+Language: Python 3.10+
 
-XGBoost 1.7+
+Modeling: XGBoost 1.7+
 
-Optuna 3.0+
+Tuning: Optuna 3.0+
 
-scikit-learn, pandas, seaborn, matplotlib
+Libraries: pandas, scikit-learn, seaborn, matplotlib
+
+---
 
 ### 📁 Project Structure
+
 ```
 .
 ├── data/                   # Raw and processed datasets (not uploaded)
-├── notebooks/              # Code
-└── README.md               # Project overview
+├── notebooks/              # Modeling and feature engineering notebooks
+├── scripts/                # Utility functions for preprocessing, training
+├── README.md               # Project documentation
+└── requirements.txt        # Dependency list
 ```
 
-### 📊 Results
+---
 
-Final AUC: 0.73
+### 🚫 Notes
 
-High-risk user detection: 65%
+Dataset not uploaded due to privacy constraints.
 
-Dimensionality reduced via gain-based feature selection
-
-Tuned encoding parameters with nested Optuna
-
-
-### 🔒 Notes
-
-Dataset not uploaded due to privacy constraints
+A small sample dataset **sample_data.csv** is available in data/ folder for reproducibility.
