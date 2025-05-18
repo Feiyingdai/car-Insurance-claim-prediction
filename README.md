@@ -63,7 +63,7 @@ pip install pandas numpy scikit-learn xgboost optuna shap matplotlib seaborn
 Open the notebook using Jupyter or Colab:
 
 ```bash
-jupyter notebook car_insurance_claim_prediction.ipynb
+jupyter notebook notebooks/car_insurance_claim_prediction.ipynb
 ```
 
 
