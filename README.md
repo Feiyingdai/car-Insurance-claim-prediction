@@ -4,6 +4,23 @@ This project develops an XGBoost-based predictive model to identify high-risk dr
 
 ---
 
+### 📚 Table of Contents
+
+- [🌟 Project Overview](#-project-overview)
+- [📊 Dataset Overview](#-dataset-overview)
+- [🚀 Quick Start](#-quick-start)
+- [🧩 Feature Groups](#-feature-groups)
+- [📦 Project Phases & To-Do List](#-project-phases--to-do-list)
+- [🌟 Final Deliverables](#-final-deliverables)
+- [📊 Results Summary](#-results-summary)
+- [📈 Model Evaluation & Business Interpretation](#model-evaluation--business-interpretation)
+- [📦 Tech Stack](#-tech-stack)
+- [📁 Project Structure](#-project-structure)
+- [🚫 Notes](#-notes)
+- [📄 License & Contribution](#-license--contribution)
+
+---
+
 ### 🌟 Project Overview
 
 #### Objective:
