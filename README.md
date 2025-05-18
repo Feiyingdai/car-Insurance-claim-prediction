@@ -219,7 +219,7 @@ Libraries: pandas, scikit-learn, seaborn, matplotlib
 .
 ├── data/                   # Raw and processed datasets (not uploaded)
 ├── notebooks/              # Modeling and feature engineering notebooks
-├── scripts/                # Utility functions for preprocessing, training
+├── image/                  # Images for modeling output
 ├── README.md               # Project documentation
 └── requirements.txt        # Dependency list
 ```
