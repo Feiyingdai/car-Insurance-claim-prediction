@@ -210,11 +210,34 @@ Model performance across validation folds:
    
 **3. 📌 Business Interpretation**
 
-By stratifying drivers based on predicted risk scores:
+By stratifying drivers based on optimal threshold (KS=0.64), we can segment the population into low-risk and high-risk groups, enabling targeted actions across pricing, underwriting, and behavioral strategies:
 
-- Optimal threshold (KS=0.64) achieved recall of 65% for High-risk segment.
+**🔎 Risk-Based Premium Adjustment**
 
-- This allows insurers to take proactive measures such as adjusting premiums, requiring additional documentation, or offering driving behavior incentives.
+High-risk drivers:
+Apply surcharges or remove discounts such as loss-free bonus
+
+Low-risk drivers:
+Offer loyalty-based incentives, such as premium rebates or discounts
+
+**🧾 Tailored Underwriting Rules**
+
+High-risk drivers:
+Set higher deductibles
+Cap maximum coverage limits
+Require installation of telematics devices for driving behavior monitoring
+
+Low-risk drivers:
+Enable fast-track policy approval with fewer documentation requirements
+
+**🚦 Proactive Behavioral Interventions**
+
+High-risk drivers:
+Recommend incentivized defensive driving courses
+Provide monthly updated risk score reports to increase awareness
+Send personalized safe-driving reminders via email or app notifications
+
+These measures not only improve portfolio profitability but also contribute to long-term risk reduction by encouraging safer driving behavior.
 
 ---
 
