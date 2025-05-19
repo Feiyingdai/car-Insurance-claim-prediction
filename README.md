@@ -214,28 +214,30 @@ By stratifying drivers based on optimal threshold (KS=0.64), we can segment the 
 
 **🔎 Risk-Based Premium Adjustment**
 
-High-risk drivers:
-Apply surcharges or remove discounts such as loss-free bonus
+- **High-risk drivers**  
+  - Apply surcharges  
+  - Remove discounts such as loss-free bonus  
 
-Low-risk drivers:
-Offer loyalty-based incentives, such as premium rebates or discounts
+- **Low-risk drivers**  
+  - Offer loyalty-based incentives (e.g., premium rebates or safe-driving discounts)
 
 **🧾 Tailored Underwriting Rules**
 
-High-risk drivers:
-Set higher deductibles
-Cap maximum coverage limits
-Require installation of telematics devices for driving behavior monitoring
+- **High-risk drivers**  
+  - Set higher deductibles  
+  - Cap maximum coverage limits  
+  - Require telematics device installation for behavior monitoring
 
-Low-risk drivers:
-Enable fast-track policy approval with fewer documentation requirements
+- **Low-risk drivers**  
+  - Enable instant policy approval  
+  - Minimize documentation requirements
 
 **🚦 Proactive Behavioral Interventions**
 
-High-risk drivers:
-Recommend incentivized defensive driving courses
-Provide monthly updated risk score reports to increase awareness
-Send personalized safe-driving reminders via email or app notifications
+- **High-risk drivers**  
+  - Recommend incentivized defensive driving courses  
+  - Provide monthly updated risk score summaries  
+  - Send personalized safe-driving reminders via email or app notifications
 
 These measures not only improve portfolio profitability but also contribute to long-term risk reduction by encouraging safer driving behavior.
 
