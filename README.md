@@ -154,7 +154,7 @@ ps_calc_* : Acceleration/braking aggressiveness, high mileage behavior...
 
 #### ✅ Phase 5: Prediction of Test Dataset
 
-- Final test set prediction is averaged over 10 models (from CV folds)
+- Final test set prediction is averaged over 10 models (Cross-Validation Ensembling)
 
 ---
 
