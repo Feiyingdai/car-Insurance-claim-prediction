@@ -131,7 +131,7 @@ To streamline feature engineering and modeling, the dataset was grouped into log
 
 ---
 
-### 🚀 Quick Start
+## 🚀 Quick Start
 
 To get started quickly, follow these steps:
 
@@ -177,66 +177,26 @@ df.head()
 ```
 ---
 
+## 📦 Project Phases & To-Do List
 
-### 🧩 Feature Groups
+### ✅ Completed
 
-**Individual Info**
+- [x] Dataset understanding and schema review
+- [x] Data cleaning and type formatting
+- [x] Exploratory data analysis (EDA)
+- [x] Feature engineering and interaction terms
+- [x] Feature selection via regularized XGBoost
+- [x] Imbalance handling (SMOTE / iterative undersampling / scale_pos_weight)
+- [x] Model training with XGBoost
+- [x] Optuna-based hyperparameter tuning (10-fold CV)
+- [x] Threshold optimization for risk segmentation
+- [x] SHAP-based model interpretation
+- [x] Business Interpretion
 
-ps_ind_* : Age group, license type, profession, training participation...
+### 📝 To-Do (Potential Future Work)
 
-**Car Features**
-
-ps_car_* : Vehicle type, battery health, charging data, Autopilot...
-
-**Region Features**
-
-ps_reg_* : Climate, traffic, charger density...
-
-**Driving Behavior**
-
-ps_calc_* : Acceleration/braking aggressiveness, high mileage behavior...
-
----
-
-### 📦 Project Phases & To-Do List
-#### ✅ Phase 1: Data Preparation & Cleaning
-
-- Balance target class using techniques like Borderline SMOTE
-
-- Handle missing values and outliers
-
-- Transform skewed variables if needed
-
-#### ✅ Phase 2: Feature Engineering
-
-- Smoothed target encoding with noise
-
-- Polynomial and interaction features
-
-- Gain/weight-based feature selection
-
-#### ✅ Phase 3: Model Development & Tuning
-
-- Model: XGBoost (with L1/L2 regularization)
-
-- Nested Optuna tuning (XGBoost hyperparameters & target encoding hyperparameters)
-
-- 10-fold stratified cross-validation
-
-#### ✅ Phase 4: Interpretation & Risk Stratification
-
-- AUC Score, ROC Curve
-
-- KS Score and Probability thresholds for claim risk segmentation of validation dataset
-
-- Recall of validation dataset
-
-- SHAP Feature Importance
-
-#### ✅ Phase 5: Prediction of Test Dataset
-
-- Final test set prediction is averaged over 10 models (Cross-Validation Ensembling)
-
+- [ ] Compare other models (e.g., Logistic Regression, LightGBM)
+- [ ] Model ensemble and stacking
 ---
 
 ### 🌟 Final Deliverables
