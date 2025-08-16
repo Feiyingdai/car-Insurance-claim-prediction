@@ -1,6 +1,6 @@
 # 🚗 Car Insurance Claim Prediction with XGBoost
 
-This project develops an XGBoost-based predictive model to identify high-risk drivers who are likely to file car insurance claims. The model leverages domain-specific features from driver demographics, vehicle details, regional conditions, and driving behavior.
+Predicting whether a driver will file a car insurance claim based on demographic, vehicle, and behavioral data. This project involves a full ML pipeline: from preprocessing and feature engineering to model tuning and business-oriented risk stratification.
 
 ---
 
@@ -23,6 +23,15 @@ This project develops an XGBoost-based predictive model to identify high-risk dr
 
 ### 🌟 Project Overview
 
+#### Backgorund:
+
+In recent years, Tesla's intelligent systems and high performance have gained significant market traction. However, some models such as Model Y and Cybertruck exhibit elevated claim frequencies and costs, attracting attention from insurers and regulators. These trends are driven by:
+- High repair costs associated with intelligent systems
+- Complex Autopilot-related accident factors
+- Heterogeneous driver behaviors and vehicle usage scenarios
+This poses increased underwriting and payout risks for insurers.
+The project proposes building a machine learning-based dynamic risk prediction model to modernize the traditional actuarial approach, leveraging data-driven modeling to quantify risk more accurately.
+
 #### Objective:
 
 Predict whether a driver will make a claim (binary classification), enabling data-driven risk stratification and personalized insurance management.
@@ -42,7 +51,7 @@ Identify high-risk drivers early and offer training, incentives, or personalized
 
 ### 📊 Dataset Overview
 
-Training set: 590,000+ rows
+Training set: 416,000+ rows
 
 Test set: 890,000+ rows
 
