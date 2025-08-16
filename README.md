@@ -4,7 +4,7 @@ Predicting whether a driver will file a car insurance claim based on demographic
 
 ---
 
-### 📚 Table of Contents
+## 📚 Table of Contents
 
 - [🌟 Project Overview](#-project-overview)
 - [📊 Dataset Overview](#-dataset-overview)
@@ -21,22 +21,23 @@ Predicting whether a driver will file a car insurance claim based on demographic
 
 ---
 
-### 🌟 Project Overview
+## 🌟 Project Overview
 
-#### Backgorund:
+### Backgorund:
 
-In recent years, Tesla's intelligent systems and high performance have gained significant market traction. However, some models such as Model Y and Cybertruck exhibit elevated claim frequencies and costs, attracting attention from insurers and regulators. These trends are driven by:
+In recent years, Tesla's intelligent systems and high performance have gained significant market traction. However, some models such as **Model Y and Cybertruck exhibit elevated claim frequencies and costs**, attracting attention from insurers and regulators. These trends are driven by:
 - High repair costs associated with intelligent systems
 - Complex Autopilot-related accident factors
 - Heterogeneous driver behaviors and vehicle usage scenarios
-This poses increased underwriting and payout risks for insurers.
-The project proposes building a machine learning-based dynamic risk prediction model to modernize the traditional actuarial approach, leveraging data-driven modeling to quantify risk more accurately.
 
-#### Objective:
+**This poses increased underwriting and payout risks for insurers**. The project proposes building a **machine learning-based dynamic risk prediction model** to modernize the traditional actuarial approach, leveraging data-driven modeling to quantify risk more accurately.
 
-Predict whether a driver will make a claim (binary classification), enabling data-driven risk stratification and personalized insurance management.
+### Objective:
 
-#### Business Applications:
+1. Identify high-risk vehicle models, driving behavior patterns and predict the likelihood of claims over a defined period.
+2. Provide quantitative basis for dynamic pricing and risk stratification.
+
+### Business Applications:
 
 💰 Risk-based Premium Adjustment
 Adjust insurance pricing based on predicted claim probabilities
@@ -49,13 +50,84 @@ Identify high-risk drivers early and offer training, incentives, or personalized
 
 ---
 
-### 📊 Dataset Overview
+## 📊 Dataset Overview
 
-Training set: 416,000+ rows
+**400,000+** training data, **600,000+** testing data for prediction.
 
-Test set: 890,000+ rows
+The dataset contains rich, multi-dimensional features covering **driver profiles**, **vehicle specifications**, **regional context**, and **driving behavior**, structured as follows:
 
-Target variable: target (1 = made a claim, 0 = no claim)
+### 🧍 Individual Features (`ps_ind_*`)
+
+| Feature         | Description |
+|----------------|-------------|
+| `ps_ind_01`     | Driver age group (ordered, e.g., 18–25, 26–35...) |
+| `ps_ind_02_cat` | License type (categorical: C1, C2, A2, etc.) |
+| `ps_ind_03`     | Driving experience (years) |
+| `ps_ind_04_cat` | Occupation risk level (e.g., white-collar, high-risk) |
+| `ps_ind_06_bin` | Prior accident history (0 = No, 1 = Yes) |
+| `ps_ind_07_bin` | Has Tesla dashcam installed (0/1) |
+| `ps_ind_16_bin` | Participated in Tesla safe driving training (0/1) |
+
+---
+
+### 🚗 Vehicle Features (`ps_car_*`)
+
+| Feature         | Description |
+|----------------|-------------|
+| `ps_car_01_cat` | Vehicle model (e.g., Model 3, Y, S, X) |
+| `ps_car_03_cat` | Battery type (e.g., LFP, NCM/NCA) |
+| `ps_car_05_cat` | Charging method (home charger, Supercharger, 3rd-party) |
+| `ps_car_11_cat` | Battery health score (0–100) |
+| `ps_car_12`     | Avg. charging time per session (hours) |
+| `ps_car_15`     | Autopilot usage frequency (avg. daily minutes) |
+
+---
+
+### 🌍 Regional Features (`ps_reg_*`)
+
+| Feature         | Description |
+|----------------|-------------|
+| `ps_reg_01`     | Climate risk index of the registered location (e.g., high rain/snow) |
+| `ps_reg_02`     | Traffic congestion index (continuous) |
+| `ps_reg_03`     | EV charging station density (chargers per km²) |
+
+---
+
+### 🛣️ Driving Behavior Features (`ps_calc_*`)
+
+| Feature         | Description |
+|----------------|-------------|
+| `ps_calc_01`     | Aggressive driving score (frequency of harsh braking/acceleration) |
+| `ps_calc_04`     | Nighttime driving ratio (share of total driving time) |
+| `ps_calc_10`     | Long-distance trip frequency (e.g., monthly trips >300km) |
+| `ps_calc_15_bin` | Sentry Mode enabled (0/1) |
+
+---
+
+## 🧩 Feature Groups
+
+To streamline feature engineering and modeling, the dataset was grouped into logical feature domains:
+
+- **Individual Attributes**: age, license type, driving history  
+- **Vehicle Characteristics**: model, battery type, charging habits, Autopilot usage  
+- **Regional Attributes**: environmental and infrastructure context  
+- **Behavioral Indicators**: aggressive driving patterns, night driving, sentry mode  
+- **Interaction Features**: engineered terms such as `vehicle × region`, `driver × behavior`, `model × usage`
+
+### 🛠 Feature Processing Techniques
+
+- **Encoding**
+  - One-Hot Encoding for low-cardinality categorical variables
+  - Target Encoding for high-cardinality categorical features
+- **Variance & Correlation Filtering**
+  - Removed low-variance features
+  - Visualized pairwise correlations to mitigate multicollinearity
+- **Feature Selection**
+  - Used shallow XGBoost with strong regularization (high λ, γ) to filter weak predictors
+  - Selected features with both **gain** and **weight** above the median
+- **Interaction Construction**
+  - Combined behavioral and regional attributes to capture localized usage risks  
+  - Example: `Autopilot usage × region congestion level`
 
 ---
 
