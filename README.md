@@ -382,7 +382,7 @@ To convert predicted probabilities into actionable business segments, thresholds
 - Ensure high recall for claimants (minimize missed high-risk individuals)
 - Maintain a realistic distribution across Low / Medium / High risk groups
 
-Precision & Recall vs Threshold on holdout set
+**Precision & Recall vs Threshold on holdout set**
 
 <img width="580" height="448" alt="image" src="https://github.com/user-attachments/assets/fe3864f7-3f34-475c-8e75-c6395ffe7029" />
 
