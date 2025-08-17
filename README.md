@@ -21,20 +21,6 @@ Predicting whether a driver will file a car insurance claim based on demographic
 - [🚫 Notes](#-notes)
 - [📄 License & Contribution](#-license--contribution)
 
-
-- [🌟 Project Overview](#-project-overview)
-- [📊 Dataset Overview](#-dataset-overview)
-- [🚀 Quick Start](#-quick-start)
-- [🧩 Feature Groups](#-feature-groups)
-- [📦 Project Phases & To-Do List](#-project-phases--to-do-list)
-- [🌟 Final Deliverables](#-final-deliverables)
-- [📊 Results Summary](#-results-summary)
-- [📈 Model Evaluation & Business Interpretation](#model-evaluation--business-interpretation)
-- [📦 Tech Stack](#-tech-stack)
-- [📁 Project Structure](#-project-structure)
-- [🚫 Notes](#-notes)
-- [📄 License & Contribution](#-license--contribution)
-
 ---
 
 ## 🌟 Project Overview
@@ -318,6 +304,17 @@ Feature engineering focused on encoding, interaction, and dimensionality reducti
    - To **prevent data leakage and avoid overfitting**, we used:
     - **10-fold cross-validation**: computed encodings from out-of-fold data
     - **Smoothing**: blended category mean with global mean based on frequency to avoid overfitting for rare categories
+
+### 📊 Correlation Heatmap
+As part of exploratory analysis, we plotted a correlation heatmap to detect highly linear relationships between features.
+
+While this provides useful insights into data structure (e.g., identifying pairs like `ps_reg_03` and `ps_reg_02` with corr > 0.7), we did **not rely on it for feature elimination**.
+<img width="982" height="865" alt="image" src="https://github.com/user-attachments/assets/5cecbedc-ad47-46b5-bd0a-c88191c0f472" />
+
+> Correlation matrices—especially Pearson or even Spearman—are limited to capturing linear or monotonic patterns. They may miss nonlinear redundancy or overstate the relationship between unrelated variables.  
+> Therefore, final feature selection was based on **model-based importance** rather than correlation alone.
+
+
 
 ### 🧬 Interaction Features
 
