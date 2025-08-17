@@ -13,8 +13,8 @@ Predicting whether a driver will file a car insurance claim based on demographic
 - [🧹 Data Cleaning](#-data-cleaning)
 - [📌 Exploratory Data Analysis (EDA)](#-exploratory-data-analysis-eda)
 - [🧩 Feature Engineering & Selection](#-feature-engineering--selection)
-- [🧠 Model Building & Evaluation](#-model-building--evaluation)
-- [📊 Results Summary](#-results-summary)
+- [🧠 Model Building](#-model-building--evaluation)
+- [📊 Model Evaludation & Results Summary](#-results-summary)
 - [💼 Business Interpretation](#-business-interpretation)
 - [📦 Tech Stack](#-tech-stack)
 - [📁 Project Structure](#-project-structure)
@@ -335,14 +335,14 @@ While this provides useful insights into data structure (e.g., identifying pairs
   - Final model retained **122 features** based on intersection of both
 
 
-## 🧠 Model Building & Evaluation
+## 🧠 Model Building
 We trained an XGBoost model to predict claim probability using individual, vehicle, regional, and behavioral features. Key steps include:
 
-- **Class Imbalance Handling**
+### Class Imbalance Handling
 The dataset was highly imbalanced, with only ~3% positive class. We experimented with:
-  - scale_pos_weight (XGBoost internal re-weighting)
-  - Borderline-SMOTE (oversampling near decision boundaries)
-  - ✅Iterative Undersampling (best result)
+- scale_pos_weight (XGBoost internal re-weighting)
+- Borderline-SMOTE (oversampling near decision boundaries)
+- ✅Iterative Undersampling (best result)
 
 - **Iterative Undersampling Strategy:**
   - Train multiple models on different undersampled subsets, for each base model:
@@ -357,18 +357,44 @@ The dataset was highly imbalanced, with only ~3% positive class. We experimented
   - Provides balanced training sets to reduce model bias
   - Helps prevent overfitting and increases model robustness via ensemble diversity
 
-
+### Hyperparameter Tuning
+- Used Optuna for 10-fold cross-validation to tune max_depth, n_estimators, learning_rate, etc.
+- Regularization (lambda, gamma) applied to prevent overfitting
+  
 ---
 
-### 📊 Results Summary
+## 📊 Model Evaludation & Results Summary
 
-| Metric                     | Result     |
-|----------------------------|------------|
-| AUC                        | 0.86       |
-| High-Risk Driver Recall    | 65%        |
-| KS Score                   | 0.64       |
+### 🔍 Model Performance
+The final XGBoost model was trained on iteratively undersampled data (1:1 positive-to-negative sampling, rotating through the entire negative class) to preserve the full signal of positive (claim) cases without introducing synthetic noise.
+- Validation AUC: ~0.64 (holdout set)
+  <img width="575" height="439" alt="image" src="https://github.com/user-attachments/assets/179eee2a-1067-4e04-b5cd-28ae18d5dc6e" />
+- Test AUC: ~0.69
+  <img width="590" height="441" alt="image" src="https://github.com/user-attachments/assets/5d8c2d7e-5015-49af-9d04-42362b0d377b" />
+This indicates a reasonably strong ability to rank drivers by claim risk, despite severe class imbalance in the raw data.
 
----
+### 🎯 Threshold-Based Risk Segmentation
+To convert predicted probabilities into actionable business segments, thresholds were tuned using the holdout set to:
+- Ensure high recall for claimants (minimize missed high-risk individuals)
+- Maintain a realistic distribution across Low / Medium / High risk groups
+
+Precision & Recall vs Threshold on holdout set
+<img width="580" height="448" alt="image" src="https://github.com/user-attachments/assets/fe3864f7-3f34-475c-8e75-c6395ffe7029" />
+
+By balancing the recall vs. operational cost tradeoff, we set:
+**High-Risk Threshold (0.54)**
+**Low-Risk Threshold (0.37)**
+
+
+| Metric                      | Holdout Set                  | Testing Set                |
+| --------------------------- | ---------------------------- | -------------------------- |
+| AUC                         | 0.64                         | 0.69                       |
+| High-Risk Threshold (≥0.54) | 27% of users, Recall = 46.5% | 24% of users, Recall = 53% |
+| Low-Risk Threshold (<0.37)  | 20% of users, Recall = 90%   | 20% of users, Recall = 94% |
+
+In testing dataset, **94% of all claimants were captured in the Medium and High risk groups**, suggesting that the Low-Risk group is truly low-risk and well suited for business strategies like faster approval or preferential pricing.
+
+
 
 ### Model Evaluation & Business Interpretation
 
