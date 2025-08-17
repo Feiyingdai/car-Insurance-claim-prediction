@@ -8,14 +8,18 @@ Predicting whether a driver will file a car insurance claim based on demographic
 
 - [🌟 Project Overview](#-project-overview)
 - [📊 Dataset Overview](#-dataset-overview)
+- [🚀 Quick Start](#-quick-start)
 - [📦 Project Phases & To-Do List](#-project-phases--to-do-list)
 - [🧹 Data Cleaning](#-data-cleaning)
 - [📌 Exploratory Data Analysis (EDA)](#-exploratory-data-analysis-eda)
 - [🧩 Feature Engineering & Selection](#-feature-engineering--selection)
-- 
-- [🌟 Final Deliverables](#-final-deliverables)
+- [📈 Model Building & Evaluation](#-model-building--evaluation)
 - [📊 Results Summary](#-results-summary)
-- [📈 Model Evaluation & Business Interpretation](#-model-evaluation--business-interpretation)
+- [📈 Business Interpretation](#-business-interpretation)
+- [📦 Tech Stack](#-tech-stack)
+- [📁 Project Structure](#-project-structure)
+- [🚫 Notes](#-notes)
+- [📄 License & Contribution](#-license--contribution)
 
 
 - [🌟 Project Overview](#-project-overview)
@@ -210,6 +214,40 @@ df.head()
 - [ ] Compare other models (e.g., Logistic Regression, LightGBM)
 - [ ] Model ensemble and stacking
 ---
+
+## 🧹 Data Cleaning
+
+The raw dataset underwent extensive preprocessing to improve quality and ensure modeling readiness. Key steps are outlined below:
+
+### 🧼 Missing Value Handling
+
+- **Categorical Variables:**
+  - For some high-impact features (e.g., `ps_car_07_cat`,`ps_ind_05_cat`), missing values were **not imputed with mode**.
+  - Instead, they were **assigned a value of `-1`** and treated as a **separate category**, as EDA showed:
+    - Missing values had **non-random patterns**
+    - Their presence was predictive of **higher/lower claim risk**
+  - For non high-impact features, missing values were **imputed with mode**.
+
+- **Numerical Variables:**
+  - Median imputation was applied to continuous variables like `ps_car_12` (charging time), which had skewed distributions.
+
+### 🔍 Outlier Detection & Clipping
+
+- Used the **IQR method** to clip extreme values in:
+  - `ps_car_12` (charging time per session)
+  - `ps_car_15` (Autopilot usage frequency)
+- This avoided distortion of downstream feature scaling and model training.
+
+
+### ⚖️ Initial Class Imbalance Check
+
+- The target variable (`claim_filed`) was highly imbalanced (~3% positive class).
+- Multiple strategies were later evaluated:
+  - **`scale_pos_weight`**
+  - **Borderline-SMOTE**
+  - **Iterative undersampling(best performer)**
+
+
 
 ### 🌟 Final Deliverables
 
