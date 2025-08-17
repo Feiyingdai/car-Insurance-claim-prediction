@@ -8,6 +8,18 @@ Predicting whether a driver will file a car insurance claim based on demographic
 
 - [🌟 Project Overview](#-project-overview)
 - [📊 Dataset Overview](#-dataset-overview)
+- [📦 Project Phases & To-Do List](#-project-phases--to-do-list)
+- [🧹 Data Cleaning](#-data-cleaning)
+- [📌 Exploratory Data Analysis (EDA)](#-exploratory-data-analysis-eda)
+- [🧩 Feature Engineering & Selection](#-feature-engineering--selection)
+- 
+- [🌟 Final Deliverables](#-final-deliverables)
+- [📊 Results Summary](#-results-summary)
+- [📈 Model Evaluation & Business Interpretation](#-model-evaluation--business-interpretation)
+
+
+- [🌟 Project Overview](#-project-overview)
+- [📊 Dataset Overview](#-dataset-overview)
 - [🚀 Quick Start](#-quick-start)
 - [🧩 Feature Groups](#-feature-groups)
 - [📦 Project Phases & To-Do List](#-project-phases--to-do-list)
@@ -191,7 +203,7 @@ df.head()
 - [x] Optuna-based hyperparameter tuning (10-fold CV)
 - [x] Threshold optimization for risk segmentation
 - [x] SHAP-based model interpretation
-- [x] Business Interpretion
+- [x] Business Insights
 
 ### 📝 To-Do (Potential Future Work)
 
