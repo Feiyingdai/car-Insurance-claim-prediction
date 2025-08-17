@@ -369,9 +369,12 @@ The dataset was highly imbalanced, with only ~3% positive class. We experimented
 ### 🔍 Model Performance
 The final XGBoost model was trained on iteratively undersampled data (1:1 positive-to-negative sampling, rotating through the entire negative class) to preserve the full signal of positive (claim) cases without introducing synthetic noise.
 - Validation AUC: ~0.64 (holdout set)
+  
   <img width="575" height="439" alt="image" src="https://github.com/user-attachments/assets/179eee2a-1067-4e04-b5cd-28ae18d5dc6e" />
 - Test AUC: ~0.69
+  
   <img width="590" height="441" alt="image" src="https://github.com/user-attachments/assets/5d8c2d7e-5015-49af-9d04-42362b0d377b" />
+  
 This indicates a reasonably strong ability to rank drivers by claim risk, despite severe class imbalance in the raw data.
 
 ### 🎯 Threshold-Based Risk Segmentation
@@ -380,6 +383,7 @@ To convert predicted probabilities into actionable business segments, thresholds
 - Maintain a realistic distribution across Low / Medium / High risk groups
 
 Precision & Recall vs Threshold on holdout set
+
 <img width="580" height="448" alt="image" src="https://github.com/user-attachments/assets/fe3864f7-3f34-475c-8e75-c6395ffe7029" />
 
 By balancing the recall vs. operational cost tradeoff, we set:
