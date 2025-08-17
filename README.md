@@ -343,19 +343,20 @@ The dataset was highly imbalanced, with only ~3% positive class. We experimented
 - scale_pos_weight (XGBoost internal re-weighting)
 - Borderline-SMOTE (oversampling near decision boundaries)
 - ✅Iterative Undersampling (best result)
+  
+### Iterative Undersampling Strategy:
+**Steps:***
+- Train multiple models on different undersampled subsets, for each base model:
+  - Use all positive samples
+  - Randomly sample a 1:1 ratio of negative samples
+- Repeat this process iteratively until all negative samples are used across the ensemble
+- Train a separate model on each subset
+- Final predictions are averaged across all models
 
-- **Iterative Undersampling Strategy:**
-  - Train multiple models on different undersampled subsets, for each base model:
-    - Use all positive samples
-    - Randomly sample a 1:1 ratio of negative samples
-  - Repeat this process iteratively until all negative samples are used across the ensemble
-  - Train a separate model on each subset
-  - Final predictions are averaged across all models
-
-- **Benefits:**
-  - Preserves full signal from minority class, without introducing synthetic examples- ensuring the real data distribution is maintained
-  - Provides balanced training sets to reduce model bias
-  - Helps prevent overfitting and increases model robustness via ensemble diversity
+**Benefits:**
+- Preserves full signal from minority class, without introducing synthetic examples- ensuring the real data distribution is maintained
+- Provides balanced training sets to reduce model bias
+- Helps prevent overfitting and increases model robustness via ensemble diversity
 
 ### Hyperparameter Tuning
 - Used Optuna for 10-fold cross-validation to tune max_depth, n_estimators, learning_rate, etc.
