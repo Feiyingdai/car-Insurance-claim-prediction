@@ -395,6 +395,12 @@ By balancing the recall vs. operational cost tradeoff, we set:
 
 In testing dataset, **94% of all claimants were captured in the Medium and High risk groups**, suggesting that the Low-Risk group is truly low-risk and well suited for business strategies like faster approval or preferential pricing.
 
+### ✅ Key Insights
+- Iterative undersampling allowed efficient use of all negative samples while fully retaining rare positive cases.
+- The model supports actionable segmentation, enabling risk-based policy adjustments.
+- Thresholding strategy is business-aligned: it balances customer volume with risk sensitivity.
+
+
 
 
 ### Model Evaluation & Business Interpretation
