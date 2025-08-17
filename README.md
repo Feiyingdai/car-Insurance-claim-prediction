@@ -141,7 +141,7 @@ To get started quickly, follow these steps:
 #### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Feiyingdai/Car-Insurance-Claim-Prediction.git
+git clone https://github.com/Feiyingdai/Car-Insurance-Claim-Prediction-Final.git
 cd Car-Insurance-Claim-Prediction
 ```
 
