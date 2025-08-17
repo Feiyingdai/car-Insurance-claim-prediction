@@ -13,9 +13,9 @@ Predicting whether a driver will file a car insurance claim based on demographic
 - [🧹 Data Cleaning](#-data-cleaning)
 - [📌 Exploratory Data Analysis (EDA)](#-exploratory-data-analysis-eda)
 - [🧩 Feature Engineering & Selection](#-feature-engineering--selection)
-- [📈 Model Building & Evaluation](#-model-building--evaluation)
+- [🧠 Model Building & Evaluation](#-model-building--evaluation)
 - [📊 Results Summary](#-results-summary)
-- [📈 Business Interpretation](#-business-interpretation)
+- [💼 Business Interpretation](#-business-interpretation)
 - [📦 Tech Stack](#-tech-stack)
 - [📁 Project Structure](#-project-structure)
 - [🚫 Notes](#-notes)
@@ -54,7 +54,7 @@ Identify high-risk drivers early and offer training, incentives, or personalized
 
 ## 📊 Dataset Overview
 
-**400,000+** training data, **600,000+** testing data for prediction.
+**400,000+** training data, **178,000+** testing data for prediction.
 
 The dataset contains rich, multi-dimensional features covering **driver profiles**, **vehicle specifications**, **regional context**, and **driving behavior**, structured as follows:
 
@@ -335,14 +335,27 @@ While this provides useful insights into data structure (e.g., identifying pairs
   - Final model retained **122 features** based on intersection of both
 
 
-### 🌟 Final Deliverables
+## 🧠 Model Building & Evaluation
+We trained an XGBoost model to predict claim probability using individual, vehicle, regional, and behavioral features. Key steps include:
 
-| Deliverable        | Description                                           |
-|--------------------|-------------------------------------------------------|
-| Trained Model      | XGBoost model with tuned hyperparameters             |
-| Feature Set        | Finalized engineered feature matrix                  |
-| Evaluation         | AUC Score, ROC Curve, KS score, Recall              |
-| Prediction         | Out-of-sample prediction on test dataset             |
+- **Class Imbalance Handling**
+The dataset was highly imbalanced, with only ~3% positive class. We experimented with:
+  - scale_pos_weight (XGBoost internal re-weighting)
+  - Borderline-SMOTE (oversampling near decision boundaries)
+  - ✅Iterative Undersampling (best result)
+
+- **Iterative Undersampling Strategy:**
+  - Train multiple models on different undersampled subsets, for each base model:
+    - Use all positive samples
+    - Randomly sample a 1:1 ratio of negative samples
+  - Repeat this process iteratively until all negative samples are used across the ensemble
+  - Train a separate model on each subset
+  - Final predictions are averaged across all models
+
+- **Benefits:**
+  - Preserves full signal from minority class, without introducing synthetic examples- ensuring the real data distribution is maintained
+  - Provides balanced training sets to reduce model bias
+  - Helps prevent overfitting and increases model robustness via ensemble diversity
 
 
 ---
