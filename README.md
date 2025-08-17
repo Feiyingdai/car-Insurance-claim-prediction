@@ -15,9 +15,9 @@ Predicting whether a driver will file a car insurance claim based on demographic
 - [🧩 Feature Engineering & Selection](#-feature-engineering--selection)
 - [🧠 Model Building](#-model-building--evaluation)
 - [📊 Model Evaludation & Results Summary](#-results-summary)
+- [🔍 SHAP Feature Importance](#-shap-feature-importance)
 - [💼 Business Interpretation](#-business-interpretation)
 - [📦 Tech Stack](#-tech-stack)
-- [📁 Project Structure](#-project-structure)
 - [🚫 Notes](#-notes)
 - [📄 License & Contribution](#-license--contribution)
 
@@ -400,73 +400,68 @@ In testing dataset, **94% of all claimants were captured in the Medium and High 
 - The model supports actionable segmentation, enabling risk-based policy adjustments.
 - Thresholding strategy is business-aligned: it balances customer volume with risk sensitivity.
 
+---
 
 
+## 🔍 SHAP Feature Importance
 
-### Model Evaluation & Business Interpretation
+To better understand the final XGBoost model's decision-making process, we computed SHAP (SHapley Additive exPlanations) values on the holdout dataset.
 
-**1. 📈 Cross-Validation Results (10 Folds)**
+### 🔧 Why SHAP?
 
-| Fold | AUC   |
-|------|-------|
-| 1    | 0.8651 |
-| 2    | 0.8652 |
-| 3    | 0.8659|
-| 4    | 0.8685 |
-| 5    | 0.8767|
-| 6    | 0.8669 |
-| 7    | 0.8670|
-| 8    | 0.8669 |
-| 9    | 0.8619 |
-| 10   | 0.8638 |
-| **Avg** | **0.8666** |
+Traditional feature importance metrics like **Gain** or **Weight** are biased in the presence of multicollinearity — where only the first selected variable captures the importance.  
+SHAP overcomes this by **fairly distributing contributions** across correlated features and explaining the **marginal contribution** of each feature to the prediction.
 
-**KS Score (avg):** 0.64  
-**Recall at KS Threshold (avg):** 0.65
+### 📈 SHAP Summary Plot
+Note: Due to privacy constraints, full feature names have been masked or abbreviated.
 
-**2. 📈 ROC Curve**
+Most important features are shown below, ranked by average absolute SHAP value:
 
-Model performance across validation folds:
+<img width="846" height="877" alt="image" src="https://github.com/user-attachments/assets/5872d384-d60d-4bc7-b07c-09731237d0cc" />
 
-![ROC Curve](image/roc.png)
+- ps_ind_05_cat and `ps_car_01_cat` (car attributes) are among the most predictive.
+- A composite encoded feature combining `ps_car_11_cat`(battery health) and `ps_car_13` shows significant importance, highlighting the benefit of targeted feature engineering.
+- ps_ind_17_bin (binary behavioral feature) and ps_ind_07_bin (Tesla Dashcam usage) also contributed substantially to the model’s prediction. Model shows Dashcam-equipped drivers are more likely to file a claim, supporting the finding from EDA.
 
-   
-**3. 📌 Business Interpretation**
+---  
 
-By stratifying drivers based on optimal threshold (KS=0.64), we can segment the population into low-risk and high-risk groups, enabling targeted actions across pricing, underwriting, and behavioral strategies:
+## 💼 Business Interpretation
+Based on the predicted claim probabilities and segmented risk thresholds, we identified three distinct customer groups:
+- High Risk (≥ 0.54): ~27% of customers; recall = 46.5% (Holdout), 53% (Testing)
+- Low Risk (< 0.37): ~20% of customers; recall = 90% (Holdout), 94% (Testing)
+- Medium Risk (in-between): Remaining ~53%
+  
+By tailoring insurance strategies to these segments, the company can optimize underwriting decisions, balance portfolio risk, and improve operational efficiency.
 
-**🔎 Risk-Based Premium Adjustment**
+### 🟥 High-Risk Customers
+These customers are significantly more likely to file a claim. To mitigate financial risk, insurers can:
+**Goal**:Reduce future claim exposure by proactively managing the riskiest segment.
+**Action**：
+- Cap maximum coverage limits: Prevent large losses by limiting payout ceilings.
+- Set higher deductibles: Shift small-claim risk to customers and discourage frequent minor claims.
+- Restrict optional coverages: Limit access to high-cost add-ons such as rental car reimbursement, windshield coverage, etc.
+- Apply stricter underwriting rules: Consider conditional acceptance, higher premiums, or require additional documentation.
 
-- **High-risk drivers**  
-  - Apply surcharges  
-  - Remove discounts such as loss-free bonus  
+### 🟨 Medium-Risk Customers
+This group represents a large portion of the portfolio with moderate claim probability. Strategies should focus on risk management and behavior improvement:
+**Goal**: Shift medium-risk customers to a lower risk group through targeted interventions.
+**Action**：
+- Usage-based insurance (UBI): Dynamically price premiums based on real-time driving behavior.
+- Incentivized safety programs: Offer discounts for completing safety training or defensive driving courses.
+- Customized engagement: Monitor over time and adjust pricing or policies as behaviors change.
 
-- **Low-risk drivers**  
-  - Offer loyalty-based incentives (e.g., premium rebates or safe-driving discounts)
+### 🟩 Low-Risk Customers
+Customers predicted to have very low claim probability. 
+**Goal**: Retain valuable customers and offer rewards.
+**Action**:
+- Offer loyalty incentives: Discounts, extended coverage, or rewards for claim-free history.
+- Bundle products: Cross-sell life, home, or umbrella insurance to improve customer lifetime value.
+- Fast-track underwriting: Simplify approval and offer streamlined digital experiences.
 
-**🧾 Tailored Underwriting Rules**
-
-- **High-risk drivers**  
-  - Set higher deductibles  
-  - Cap maximum coverage limits  
-  - Require telematics device installation for behavior monitoring
-
-- **Low-risk drivers**  
-  - Enable instant policy approval  
-  - Minimize documentation requirements
-
-**🚦 Proactive Behavioral Interventions**
-
-- **High-risk drivers**  
-  - Recommend incentivized defensive driving courses  
-  - Provide monthly updated risk score summaries  
-  - Send personalized safe-driving reminders via email or app notifications
-
-These measures not only improve portfolio profitability but also contribute to long-term risk reduction by encouraging safer driving behavior.
 
 ---
 
-### 📦 Tech Stack
+## 📦 Tech Stack
 
 Language: Python 3.10+
 
@@ -478,20 +473,7 @@ Libraries: pandas, scikit-learn, seaborn, matplotlib
 
 ---
 
-### 📁 Project Structure
-
-```
-.
-├── data/                   # Raw and processed datasets (not uploaded)
-├── notebooks/              # Modeling and feature engineering notebooks
-├── image/                  # Images for modeling output
-├── README.md               # Project documentation
-└── requirements.txt        # Dependency list
-```
-
----
-
-### 🚫 Notes
+## 🚫 Notes
 
 Dataset not uploaded due to privacy constraints.
 
