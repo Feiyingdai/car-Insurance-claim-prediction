@@ -223,13 +223,18 @@ The raw dataset underwent extensive preprocessing to improve quality and ensure 
 
 - **Categorical Variables:**
   - For some high-impact features (e.g., `ps_car_07_cat`,`ps_ind_05_cat`), missing values were **not imputed with mode**.
+  <img width="1180" height="394" alt="image" src="https://github.com/user-attachments/assets/47e3eeef-299c-4ff9-b1ba-2bf5f56d7dc4" />
+  
   - Instead, they were **assigned a value of `-1`** and treated as a **separate category**, as EDA showed:
     - Missing values had **non-random patterns**
     - Their presence was predictive of **higher/lower claim risk**
+   
   - For non high-impact features, missing values were **imputed with mode**.
 
 - **Numerical Variables:**
-  - Median imputation was applied to continuous variables like `ps_car_12` (charging time), which had skewed distributions.
+  - Median imputation was applied to continuous variables like `ps_reg_03` (EV charger density/km²), which had skewed distributions.
+  <img width="728" height="287" alt="image" src="https://github.com/user-attachments/assets/632bdf76-4214-4c6b-8f74-db38b88b26ca" />
+
 
 ### 🔍 Outlier Detection & Clipping
 
@@ -242,11 +247,95 @@ The raw dataset underwent extensive preprocessing to improve quality and ensure 
 ### ⚖️ Initial Class Imbalance Check
 
 - The target variable (`claim_filed`) was highly imbalanced (~3% positive class).
+  <img width="597" height="422" alt="image" src="https://github.com/user-attachments/assets/de83ae86-fb36-4386-bb05-30c5f9810ea7" />
+
 - Multiple strategies were later evaluated:
   - **`scale_pos_weight`**
   - **Borderline-SMOTE**
   - **Iterative undersampling(best performer)**
 
+---
+## 📌 Exploratory Data Analysis (EDA)
+
+We performed a thorough exploratory analysis to better understand data distribution, and explore relationships between key features and the target variable.
+
+**Key EDA Highlights:**
+To understand feature-target relationships and identify predictive patterns, we visualized:
+
+- **Continuous features** using boxplots, grouped by target (claim filed vs not)
+- **Categorical features** using aggregated claim rates per category level, by calculating **claim rate by category**, we avoided repeating the 0/1 bars and enhanced interpretability for categorical features.
+
+### 🔍 Key Observations:
+1. An **unexpected pattern** was observed with `ps_ind_01` (Driver Age), `ps_ind_03` (Driving Experience): claimants appear to have **higher driver age and driving experience values** on average.
+This may suggest:
+- Experience is not linearly related to safe driving
+- More experienced drivers may take more risks or drive longer distances
+
+2. Also **contrary to expectations**, `ps_car_15` (Autopilot usage) shows **slightly higher values among claimants**.
+This observation suggests:
+- Heavier reliance on Autopilot may **not reduce claim risk**, and might even be associated with riskier driving contexts
+- Possible explanations include:
+  - Overconfidence when using semi-autonomous systems
+  - More highway driving exposure (where Autopilot is typically used)
+
+3. Tesla Dashcam installation（`ps_ind_07_bin = 1`）shows **a higher claim rate** among users who have installed the device.
+This suggests:
+- Dashcam-equipped drivers are more likely to file a claim
+- Possible explanations include:
+  - Drivers with dashcams may be more assertive in reporting incidents, knowing they have video evidence
+  - Dashcam installation could be more common among risk-conscious or previously involved drivers
+  - Alternatively, it might reflect reverse causality: drivers with prior incidents tend to install dashcams afterward
+
+4.Interestingly, `ps_ind_06_bin` (accident history) shows **lower claim rates** for users with prior accident records.
+This may reflect:
+- **Behavioral correction**: Drivers with prior incidents may drive more cautiously afterward
+- **Claims aversion**: Experienced claimants might avoid filing for minor damages due to higher premiums or claim fatigue
+- **Policy design effects**: Insurers may impose stricter rules (e.g., higher deductibles) on drivers with prior accidents, reducing future claims
+
+5. High-risk occupations (`ps_ind_04_cat = 1`) show significantly higher claim rates
+   
+6. High traffic congestion(`ps_reg_02`) show higher claim rates
+
+<img width="1195" height="598" alt="image" src="https://github.com/user-attachments/assets/15e631b9-3a05-450e-be4b-f460fbd22e46" />
+
+<img width="1187" height="605" alt="image" src="https://github.com/user-attachments/assets/693f86e6-875d-4bcf-a2b5-1a1a2c885298" />
+
+### 🔍 Several counter-intuitive insights emerged during EDA：
+- Highlight the **limitations of linear modeling**, where such non-monotonic or interaction-driven effects are difficult to capture.
+- As a result, we chose to build a **tree-based model (XGBoost)** to automatically learn complex **non-linear relationships** and **feature interactions**, rather than assuming a linear form.
+
+---
+
+
+## 🧩 Feature Engineering & Selection
+
+Feature engineering focused on encoding, interaction, and dimensionality reduction.
+
+### 🧩 Encoding Strategy
+
+- **XGBoost Native Categorical Handling (`enable_categorical=True`)**: Applied to low-cardinality categorical variables
+- **Target Encoding**: Used for high-cardinality features `ps_car_11_cat`(battery health score)
+   - To **prevent data leakage and avoid overfitting**, we used:
+    - **10-fold cross-validation**: computed encodings from out-of-fold data
+    - **Smoothing**: blended category mean with global mean based on frequency to avoid overfitting for rare categories
+
+### 🧬 Interaction Features
+
+- Engineered combinations for numerical features like:
+  - `Autopilot usage × region congestion`
+  - `Autopilot usage × driving age`
+
+### 🪓 Feature Selection Process
+-  **Variance Filtering**
+  - Removed features with **near-zero variance**
+  - These features contribute little to model differentiation and often introduce noise
+
+- Used a **shallow XGBoost model with strong regularization** (high λ, γ) to evaluate feature importance.
+
+  **Selection Criteria:**
+  - `Gain > median(gain)`
+  - `Weight > median(weight)`
+  - Final model retained **122 features** based on intersection of both
 
 
 ### 🌟 Final Deliverables
