@@ -14,7 +14,7 @@ Predicting whether a driver will file a car insurance claim based on demographic
 - [📌 Exploratory Data Analysis (EDA)](#-exploratory-data-analysis-eda)
 - [🧩 Feature Engineering & Selection](#-feature-engineering--selection)
 - [🧠 Model Building](#-model-building)
-- [📊 Model Evaludation & Results Summary](#-model-evaluation-&-results-summary)
+- [📊 Model Evaludation](#-model-evaluation)
 - [🔍 SHAP Feature Importance](#-shap-feature-importance)
 - [💼 Business Interpretation](#-business-interpretation)
 - [📦 Tech Stack](#-tech-stack)
@@ -364,7 +364,7 @@ The dataset was highly imbalanced, with only ~3% positive class. We experimented
   
 ---
 
-## 📊 Model Evaludation & Results Summary
+## 📊 Model Evaludation
 
 ### 🔍 Model Performance
 The final XGBoost model was trained on iteratively undersampled data (1:1 positive-to-negative sampling, rotating through the entire negative class) to preserve the full signal of positive (claim) cases without introducing synthetic noise.
