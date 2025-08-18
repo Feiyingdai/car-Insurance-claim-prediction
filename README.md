@@ -439,7 +439,9 @@ By tailoring insurance strategies to these segments, the company can optimize un
 
 ### 🟥 High-Risk Customers
 These customers are significantly more likely to file a claim. To mitigate financial risk, insurers can:
+
 **Goal**:Reduce future claim exposure by proactively managing the riskiest segment.
+
 **Action**：
 - Cap maximum coverage limits: Prevent large losses by limiting payout ceilings.
 - Set higher deductibles: Shift small-claim risk to customers and discourage frequent minor claims.
@@ -448,7 +450,9 @@ These customers are significantly more likely to file a claim. To mitigate finan
 
 ### 🟨 Medium-Risk Customers
 This group represents a large portion of the portfolio with moderate claim probability. Strategies should focus on risk management and behavior improvement:
+
 **Goal**: Shift medium-risk customers to a lower risk group through targeted interventions.
+
 **Action**：
 - Usage-based insurance (UBI): Dynamically price premiums based on real-time driving behavior.
 - Incentivized safety programs: Offer discounts for completing safety training or defensive driving courses.
@@ -456,7 +460,9 @@ This group represents a large portion of the portfolio with moderate claim proba
 
 ### 🟩 Low-Risk Customers
 Customers predicted to have very low claim probability. 
+
 **Goal**: Retain valuable customers and offer rewards.
+
 **Action**:
 - Offer loyalty incentives: Discounts, extended coverage, or rewards for claim-free history.
 - Bundle products: Cross-sell life, home, or umbrella insurance to improve customer lifetime value.
