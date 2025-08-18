@@ -14,7 +14,7 @@ Predicting whether a driver will file a car insurance claim based on demographic
 - [📌 Exploratory Data Analysis (EDA)](#-exploratory-data-analysis-eda)
 - [🧩 Feature Engineering & Selection](#-feature-engineering--selection)
 - [🧠 Model Building](#-model-building)
-- [📊 Model Evaludation](#-model-evaluation)
+- [📊 Model Evaluation](#-model-evaluation)
 - [🔍 SHAP Feature Importance](#-shap-feature-importance)
 - [💼 Business Interpretation](#-business-interpretation)
 - [📦 Tech Stack](#-tech-stack)
