@@ -364,7 +364,7 @@ The dataset was highly imbalanced, with only ~3% positive class. We experimented
   
 ---
 
-## 📊 Model Evaludation
+## 📊 Model Evaluation
 
 ### 🔍 Model Performance
 The final XGBoost model was trained on iteratively undersampled data (1:1 positive-to-negative sampling, rotating through the entire negative class) to preserve the full signal of positive (claim) cases without introducing synthetic noise.
