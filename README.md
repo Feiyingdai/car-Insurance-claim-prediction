@@ -399,7 +399,7 @@ By balancing the recall vs. operational cost tradeoff, we set:
 | - Medium-Risk Users [0.37, 0.54) | 53% of users, Recall = 43.5% | 56% of users, Recall = 40.9%|
 | Low-Risk Users [0,0.37)  | 20% of users, Recall = 10%   | 20% of users, Recall = 6.2% |
 
-In testing dataset, **94% of all claimants were captured in the Medium and High risk groups**, suggesting that the Low-Risk group is truly low-risk and well suited for business strategies like faster approval or preferential pricing.
+In testing dataset, **94% of all claimants** were captured in the **Medium and High risk groups**, suggesting that the Low-Risk group is truly low-risk and well suited for business strategies like faster approval or preferential pricing.
 
 ### ✅ Key Insights
 - Iterative undersampling allowed efficient use of all negative samples while fully retaining rare positive cases.
