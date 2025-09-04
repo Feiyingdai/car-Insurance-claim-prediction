@@ -393,7 +393,7 @@ By balancing the recall vs. operational cost tradeoff, we set:
 
 | Metric                      | Holdout Set                  | Testing Set                |
 | --------------------------- | ---------------------------- | -------------------------- |
-| AUC                         | 0.64                         | 0.69                       |
+| **AUC**                        | **0.64**                         | **0.69**                       |
 | **Medium + High Risk Users [0.37, 1]** | **80% of users, Recall = 90%** | **80% of users, Recall = 93.8%**|
 | - High-Risk Users [0.54, 1] | 27% of users, Recall = 46.5% | 24% of users, Recall = 52.9% |
 | - Medium-Risk Users [0.37, 0.54) | 53% of users, Recall = 43.5% | 56% of users, Recall = 40.9%|
