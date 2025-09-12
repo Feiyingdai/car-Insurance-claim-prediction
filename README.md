@@ -384,9 +384,13 @@ To convert predicted probabilities into actionable business segments, thresholds
 - Ensure high recall for claimants (minimize missed high-risk individuals)
 - Maintain a realistic distribution across Low / Medium / High risk groups
 
-**Precision & Recall vs Threshold on CV set**
+**Precision & Recall vs Threshold Plot on CV set**
 
-<img width="580" height="448" alt="image" src="https://github.com/user-attachments/assets/fe3864f7-3f34-475c-8e75-c6395ffe7029" />
+<img width="581" height="453" alt="image" src="https://github.com/user-attachments/assets/accf8e74-2178-4261-9eb8-ec644ca5cb36" />
+
+
+**Precision & Recall vs Threshold Table on CV set**
+<img width="582" height="551" alt="image" src="https://github.com/user-attachments/assets/65846926-1a38-4c08-8ec8-cbbc3e499bac" />
 
 By balancing the recall vs. operational cost tradeoff, we set:
 **High-Risk Threshold (0.36)**
