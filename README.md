@@ -393,6 +393,8 @@ To convert predicted probabilities into actionable business segments, thresholds
 
 <img width="582" height="551" alt="image" src="https://github.com/user-attachments/assets/65846926-1a38-4c08-8ec8-cbbc3e499bac" />
 
+
+
 By balancing the recall vs. operational cost tradeoff, we set:
 **High-Risk Threshold (0.36)**
 **Low-Risk Threshold (0.23)**
