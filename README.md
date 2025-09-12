@@ -345,10 +345,10 @@ The dataset was highly imbalanced, with only ~3% positive class. We experimented
 - ✅Iterative Undersampling (best result)
   
 ### Iterative Undersampling Strategy:
-**Steps:***
+**Steps:**
 - Train multiple models on different undersampled subsets, for each base model:
   - Use all positive samples
-  - Randomly sample a 1:1 ratio of negative samples
+  - Randomly sample a 1:2 ratio of negative samples
 - Repeat this process iteratively until all negative samples are used across the ensemble
 - Train a separate model on each subset
 - Final predictions are averaged across all models
@@ -367,39 +367,41 @@ The dataset was highly imbalanced, with only ~3% positive class. We experimented
 ## 📊 Model Evaluation
 
 ### 🔍 Model Performance
-The final XGBoost model was trained on iteratively undersampled data (1:1 positive-to-negative sampling, rotating through the entire negative class) to preserve the full signal of positive (claim) cases without introducing synthetic noise.
-- Validation AUC: ~0.64 (holdout set)
+The final XGBoost model was trained on iteratively undersampled data (1:2 positive-to-negative sampling, rotating through the entire negative class) to preserve the full signal of positive (claim) cases without introducing synthetic noise.
+- Cross Validation AUC: ~0.64 
   
-  <img width="575" height="439" alt="image" src="https://github.com/user-attachments/assets/179eee2a-1067-4e04-b5cd-28ae18d5dc6e" />
-- Test AUC: ~0.69
+  <img width="602" height="449" alt="image" src="https://github.com/user-attachments/assets/60c7599d-7ce4-4b20-baea-ad0c61f310f1" />
+
+- Test AUC: ~0.70
   
-  <img width="590" height="441" alt="image" src="https://github.com/user-attachments/assets/5d8c2d7e-5015-49af-9d04-42362b0d377b" />
+  <img width="574" height="444" alt="image" src="https://github.com/user-attachments/assets/05bf77e0-d5a9-479e-abb1-a5909a35a66d" />
+
   
 This indicates a reasonably strong ability to rank drivers by claim risk, despite severe class imbalance in the raw data.
 
 ### 🎯 Threshold-Based Risk Segmentation
-To convert predicted probabilities into actionable business segments, thresholds were tuned using the holdout set to:
+To convert predicted probabilities into actionable business segments, thresholds were tuned using the cross validation set to:
 - Ensure high recall for claimants (minimize missed high-risk individuals)
 - Maintain a realistic distribution across Low / Medium / High risk groups
 
-**Precision & Recall vs Threshold on holdout set**
+**Precision & Recall vs Threshold on CV set**
 
 <img width="580" height="448" alt="image" src="https://github.com/user-attachments/assets/fe3864f7-3f34-475c-8e75-c6395ffe7029" />
 
 By balancing the recall vs. operational cost tradeoff, we set:
-**High-Risk Threshold (0.54)**
-**Low-Risk Threshold (0.37)**
+**High-Risk Threshold (0.36)**
+**Low-Risk Threshold (0.23)**
 
 
-| Metric                      | Holdout Set                  | Testing Set                |
+| Metric                      | CV Set                  | Testing Set                |
 | --------------------------- | ---------------------------- | -------------------------- |
-| **AUC**                        | **0.64**                         | **0.69**                       |
-| **Medium + High Risk Users [0.37, 1]** | **80% of users, Recall = 90%** | **80% of users, Recall = 93.8%**|
-| - High-Risk Users [0.54, 1] | 27% of users, Recall = 46.5% | 24% of users, Recall = 52.9% |
-| - Medium-Risk Users [0.37, 0.54) | 53% of users, Recall = 43.5% | 56% of users, Recall = 40.9%|
-| Low-Risk Users [0,0.37)  | 20% of users, Recall = 10%   | 20% of users, Recall = 6.2% |
+| **AUC**                        | **0.64**                         | **0.70**                       |
+| **Medium + High Risk Users [0.23, 1]** | **82% of users, Recall = 92%** | **85% of users, Recall = 96.5%**|
+| - High-Risk Users [0.36, 1] | 29% of users, Recall = 47% | 37% of users, Recall = 65% |
+| - Medium-Risk Users [0.23, 0.36) | 53% of users, Recall = 45% | 48% of users, Recall = 31.5%|
+| Low-Risk Users [0,0.23)  | 18% of users, Recall = 8%   | 15% of users, Recall = 3.5% |
 
-In testing dataset, **94% of all claimants** were captured in the **Medium and High risk groups**, suggesting that the Low-Risk group is truly low-risk and well suited for business strategies like faster approval or preferential pricing.
+In testing dataset, **96.5% of all claimants** were captured in the **Medium and High risk groups**, suggesting that the Low-Risk group is truly low-risk and well suited for business strategies like faster approval or preferential pricing.
 
 ### ✅ Key Insights
 - Iterative undersampling allowed efficient use of all negative samples while fully retaining rare positive cases.
@@ -433,8 +435,8 @@ Most important features are shown below, ranked by average absolute SHAP value:
 
 ## 💼 Business Interpretation
 Based on the predicted claim probabilities and segmented risk thresholds, we identified three distinct customer groups:
-- High Risk (≥ 0.54): ~27% of customers; recall = 46.5% (Holdout), 53% (Testing)
-- Low Risk (< 0.37): ~20% of customers; recall = 90% (Holdout), 94% (Testing)
+- High Risk (≥ 0.36): ~29% of customers
+- Low Risk (< 0.23): ~18% of customers
 - Medium Risk (in-between): Remaining ~53%
   
 By tailoring insurance strategies to these segments, the company can optimize underwriting decisions, balance portfolio risk, and improve operational efficiency.
