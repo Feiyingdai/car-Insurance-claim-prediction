@@ -282,9 +282,11 @@ This may reflect:
    
 6. High traffic congestion(`ps_reg_02`) show higher claim rates
 
-<img width="1195" height="598" alt="image" src="https://github.com/user-attachments/assets/15e631b9-3a05-450e-be4b-f460fbd22e46" />
+<img width="1207" height="605" alt="image" src="https://github.com/user-attachments/assets/60ed6a98-20a9-4432-b375-a6a169781197" />
 
-<img width="1187" height="605" alt="image" src="https://github.com/user-attachments/assets/693f86e6-875d-4bcf-a2b5-1a1a2c885298" />
+
+<img width="1192" height="617" alt="image" src="https://github.com/user-attachments/assets/07fcea5b-9f67-4966-9cdf-5624975dcd62" />
+
 
 ### 🔍 Several counter-intuitive insights emerged during EDA：
 - Highlight the **limitations of linear modeling**, where such non-monotonic or interaction-driven effects are difficult to capture.
