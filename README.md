@@ -278,7 +278,7 @@ This may reflect:
 - **Claims aversion**: Experienced claimants might avoid filing for minor damages due to higher premiums or claim fatigue
 - **Policy design effects**: Insurers may impose stricter rules (e.g., higher deductibles) on drivers with prior accidents, reducing future claims
 
-5. High-risk occupations (`ps_ind_04_cat = 1`) show significantly higher claim rates
+5. Comletelt safety training (`ps_ind_16_bin = 1`) show lower claim rates
    
 6. High traffic congestion(`ps_reg_02`) show higher claim rates
 
