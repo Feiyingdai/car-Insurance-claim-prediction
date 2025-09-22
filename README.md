@@ -316,10 +316,13 @@ Feature engineering focused on encoding, interaction, and dimensionality reducti
   - **Smoothing**: blended category mean with global mean based on frequency to avoid overfitting for rare categories
 
 ### 📊 Correlation Heatmap
-As part of exploratory analysis, we plotted a correlation heatmap to detect highly linear relationships between features.
+- We plotted a correlation heatmap to detect linear relationships between features. 
+  - Numerical Variables(Pearson / Spearman Correlation)  
+  <img width="904" height="886" alt="image" src="https://github.com/user-attachments/assets/db4548a9-b97b-4d4d-87b4-e55dc6418c02" />
+  While this provides useful insights into data structure (e.g., identifying pairs like `ps_reg_03` and `ps_reg_02` with corr > 0.7), we did **not rely on it for feature elimination**.
 
-While this provides useful insights into data structure (e.g., identifying pairs like `ps_reg_03` and `ps_reg_02` with corr > 0.7), we did **not rely on it for feature elimination**.
-<img width="982" height="865" alt="image" src="https://github.com/user-attachments/assets/5cecbedc-ad47-46b5-bd0a-c88191c0f472" />
+  - Categorical Variables(Cramer's V)
+  <img width="871" height="866" alt="image" src="https://github.com/user-attachments/assets/6b5d1c29-fd2c-432c-9953-a27a4d2ab547" />
 
 - Correlation matrices—especially Pearson or even Spearman—are limited to capturing linear or monotonic patterns. They may miss nonlinear redundancy or overstate the relationship between unrelated variables.  
 - Therefore, final feature selection was based on **model-based importance** rather than correlation alone.
