@@ -311,10 +311,9 @@ Feature engineering focused on encoding, interaction, and dimensionality reducti
 ### 🧩 Encoding Strategy
 
 - **XGBoost Native Categorical Handling (`enable_categorical=True`)**: Applied to low-cardinality categorical variables
-- **Target Encoding**: Used for high-cardinality features `ps_car_11_cat`(battery health score)
-   - To **prevent data leakage and avoid overfitting**, we used:
-    - **10-fold cross-validation**: computed encodings from out-of-fold data
-    - **Smoothing**: blended category mean with global mean based on frequency to avoid overfitting for rare categories
+- **Target Encoding**: Used for high-cardinality features `ps_car_11_cat`(battery health score).To **prevent data leakage and avoid overfitting**, we used:
+  - **10-fold cross-validation**: computed encodings from out-of-fold data
+  - **Smoothing**: blended category mean with global mean based on frequency to avoid overfitting for rare categories
 
 ### 📊 Correlation Heatmap
 As part of exploratory analysis, we plotted a correlation heatmap to detect highly linear relationships between features.
