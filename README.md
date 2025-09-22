@@ -230,7 +230,6 @@ The raw dataset underwent extensive preprocessing to improve quality and ensure 
 
 
 
-
 ### 🔍 Outlier Detection & Clipping
 
 - Used the **IQR method** to clip extreme values in:
@@ -242,7 +241,8 @@ The raw dataset underwent extensive preprocessing to improve quality and ensure 
 ### ⚖️ Initial Class Imbalance Check
 
 - The target variable (`claim_filed`) was highly imbalanced (~3% positive class).
-  <img width="597" height="422" alt="image" src="https://github.com/user-attachments/assets/de83ae86-fb36-4386-bb05-30c5f9810ea7" />
+<img width="439" height="376" alt="image" src="https://github.com/user-attachments/assets/e17e5ef6-b51f-404d-a589-5fc03fec3ae8" />
+
 
 - Multiple strategies were later evaluated:
   - **`scale_pos_weight`**
