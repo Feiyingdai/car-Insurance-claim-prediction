@@ -114,22 +114,21 @@ To streamline feature engineering and modeling, the dataset was grouped into log
 - **Vehicle Characteristics**: model, battery type, charging habits, Autopilot usage  
 - **Regional Attributes**: environmental and infrastructure context  
 - **Behavioral Indicators**: aggressive driving patterns, night driving, sentry mode  
-- **Interaction Features**: engineered terms such as `vehicle × region`, `driver × behavior`, `model × usage`
+- **Interaction Features**: engineered terms such as `traffic congestion × autopilot usage frequency`, `battery health × aggresive driving score`
 
 ### 🛠 Feature Processing Techniques
 
 - **Encoding**
   - One-Hot Encoding for low-cardinality categorical variables
   - Target Encoding for high-cardinality categorical features
-- **Variance & Correlation Filtering**
-  - Removed low-variance features
-  - Visualized pairwise correlations to mitigate multicollinearity
-- **Feature Selection**
-  - Used shallow XGBoost with strong regularization (high λ, γ) to filter weak predictors
-  - Selected features with both **gain** and **weight** above the median
+- **Correlation Filtering**
+  - Visualized pairwise correlations
 - **Interaction Construction**
-  - Combined behavioral and regional attributes to capture localized usage risks  
-  - Example: `Autopilot usage × region congestion level`
+  - Filter numerical features with correlation coefficient(>=0.02) and create interactive features between them
+  - Example: `Autopilot usage frequency × region congestion level`
+- **Feature Selection**
+  - Used shallow XGBoost with strong regularization (high λ, γ)
+  - Selected features with both **gain** and **weight** above the median
 
 ---
 
@@ -207,19 +206,28 @@ The raw dataset underwent extensive preprocessing to improve quality and ensure 
 
 ### 🧼 Missing Value Handling
 
-- **Categorical Variables:**
-  - For some high-impact features (e.g., `ps_car_07_cat`,`ps_ind_05_cat`), missing values were **not imputed with mode**.
-  <img width="1180" height="394" alt="image" src="https://github.com/user-attachments/assets/47e3eeef-299c-4ff9-b1ba-2bf5f56d7dc4" />
-  
-  - Instead, they were **assigned a value of `-1`** and treated as a **separate category**, as EDA showed:
-    - Missing values had **non-random patterns**
-    - Their presence was predictive of **higher/lower claim risk**
-   
-  - For non high-impact features, missing values were **imputed with mode**.
+-- **Missing Value Matrix & Missing Value Heatmap**
+  - Use missing value matrix and heatmap to see if these  data are in **MCAR(missing at random)**  or **MAR(missing at random)** pattern.
+<img width="1066" height="629" alt="image" src="https://github.com/user-attachments/assets/ae0042c1-d344-47ce-8439-7a38b4bbb894" />
+
+<img width="737" height="612" alt="image" src="https://github.com/user-attachments/assets/da773ed9-7785-4b32-a2f6-06ef5699b748" />
 
 - **Numerical Variables:**
-  - Median imputation was applied to continuous variables like `ps_reg_03` (EV charger density/km²), which had skewed distributions.
-  <img width="728" height="287" alt="image" src="https://github.com/user-attachments/assets/632bdf76-4214-4c6b-8f74-db38b88b26ca" />
+  - 'ps_reg_03' and 'ps_car_14', 'ps_car_11', 'ps_car_12' seems MCAR type since the correlation coeffient in missing value heatmap is almost 0 , we will impute them with mean or medium based on their data distribution.
+  - Median imputation was applied to these missing variables since they had skewed distributions.
+<img width="1201" height="593" alt="image" src="https://github.com/user-attachments/assets/c9d7197b-ff17-4978-bbc7-a348206e7d52" />
+
+
+- **Categorical Variables:**
+  -'ps_car_03_cat','ps_car_05_cat' had over 40% missing values, so we'll drop them first.
+  - 'ps_car_07_cat','ps_ind_05_cat', 'ps_car_09_cat', 'ps_ind_02_cat', 'ps_car_01_cat', 'ps_ind_04_cat', we’ll keep -1 as a **separate category**, as EDA showed:
+    - Missing values had **non-random patterns**
+    - Their presence was predictive of **higher/lower claim risk**
+  <img width="892" height="446" alt="image" src="https://github.com/user-attachments/assets/5baa9870-29e6-43cb-bb92-35c7bde048a5" />
+
+  -For the column 'ps_car_02_cat', it seems MCAR type, we'll **impute using the mode**.
+
+
 
 
 ### 🔍 Outlier Detection & Clipping
