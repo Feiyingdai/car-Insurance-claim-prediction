@@ -320,7 +320,6 @@ Feature engineering focused on encoding, interaction, and dimensionality reducti
   - Numerical Variables(Pearson / Spearman Correlation)
     
   <img width="904" height="886" alt="image" src="https://github.com/user-attachments/assets/db4548a9-b97b-4d4d-87b4-e55dc6418c02" />
-   While this provides useful insights into data structure (e.g., identifying pairs like `ps_reg_03` and `ps_reg_02` with corr > 0.7), we did **not rely on it for feature elimination**.
 
   - Categorical Variables(Cramer's V)
     
@@ -333,22 +332,19 @@ Feature engineering focused on encoding, interaction, and dimensionality reducti
 
 ### 🧬 Interaction Features
 
-- Engineered combinations for numerical features like:
-  - `Autopilot usage × region congestion`
-  - `Autopilot usage × driving age`
+- Filter numerical features with correlation coefficient(>=0.02) and create interactive features between them
+- Example: `Autopilot usage frequency × region congestion level`
 
 ### 🪓 Feature Selection Process
--  **Variance Filtering**
-  - Removed features with **near-zero variance**
-  - These features contribute little to model differentiation and often introduce noise
 
 - Used a **shallow XGBoost model with strong regularization** (high λ, γ) to evaluate feature importance.
 
   **Selection Criteria:**
-  - `Gain > median(gain)`
-  - `Weight > median(weight)`
-  - Final model retained **122 features** based on intersection of both
+  - `Cumulative Gain > 90%`
+  - `Cumulative Weight > 90%`
+  - Final model retained **50+ features** based on intersection of both
 
+---
 
 ## 🧠 Model Building
 We trained an XGBoost model to predict claim probability using individual, vehicle, regional, and behavioral features. Key steps include:
