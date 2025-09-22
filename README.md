@@ -357,6 +357,7 @@ The dataset was highly imbalanced, with only ~3% positive class. We experimented
   
 ### Iterative Undersampling Strategy:
 **Steps:**
+- Tuned XGBoost hyperparameters with 10-fold cross-validation on whole training datase with scale_pos_weight = 26 to ensure global optimal
 - Train multiple models on different undersampled subsets, for each base model:
   - Use all positive samples
   - Randomly sample a 1:2 ratio of negative samples
