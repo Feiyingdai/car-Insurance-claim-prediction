@@ -206,11 +206,11 @@ The raw dataset underwent extensive preprocessing to improve quality and ensure 
 
 ### 🧼 Missing Value Handling
 
--- **Missing Value Matrix & Missing Value Heatmap**
+- **Missing Value Matrix & Missing Value Heatmap**
   - Use missing value matrix and heatmap to see if these  data are in **MCAR(missing at random)**  or **MAR(missing at random)** pattern.
-<img width="1066" height="629" alt="image" src="https://github.com/user-attachments/assets/ae0042c1-d344-47ce-8439-7a38b4bbb894" />
+    <img width="1066" height="629" alt="image" src="https://github.com/user-attachments/assets/ae0042c1-d344-47ce-8439-7a38b4bbb894" />
 
-<img width="737" height="612" alt="image" src="https://github.com/user-attachments/assets/da773ed9-7785-4b32-a2f6-06ef5699b748" />
+    <img width="737" height="612" alt="image" src="https://github.com/user-attachments/assets/da773ed9-7785-4b32-a2f6-06ef5699b748" />
 
 - **Numerical Variables:**
   - 'ps_reg_03' and 'ps_car_14', 'ps_car_11', 'ps_car_12' seems MCAR type since the correlation coeffient in missing value heatmap is almost 0 , we will impute them with mean or medium based on their data distribution.
