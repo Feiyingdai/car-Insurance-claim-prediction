@@ -444,11 +444,12 @@ Note: Due to privacy constraints, full feature names have been masked or abbrevi
 
 Most important features are shown below, ranked by average absolute SHAP value:
 
-<img width="846" height="877" alt="image" src="https://github.com/user-attachments/assets/5872d384-d60d-4bc7-b07c-09731237d0cc" />
+<img width="846" height="872" alt="image" src="https://github.com/user-attachments/assets/2abe469c-7e92-42b0-806c-34518d6bc3d5" />
 
-- ps_ind_05_cat and `ps_car_01_cat` (car attributes) are among the most predictive.
-- A composite encoded feature combining `ps_car_11_cat`(battery health) and `ps_car_13` shows significant importance, highlighting the benefit of targeted feature engineering.
-- ps_ind_17_bin (binary behavioral feature) and ps_ind_07_bin (Tesla Dashcam usage) also contributed substantially to the model’s prediction. Model shows Dashcam-equipped drivers are more likely to file a claim, supporting the finding from EDA.
+
+- Individual attributes like `ps_ind_03`(driving experience), `ps_ind_05_cat`, `ps_ind_17_bin` are among the most predictive.
+- A composite encoded feature combining `ps_car_11_cat_enc`(battery health) and `ps_car_13`, `ps_reg_01`(climate risk index) and `ps_car_15`(autopilot usage) shows significant importance, highlighting the benefit of targeted feature engineering.
+-`ps_car_01_cat` (vehicle model) also contributed substantially to the model’s prediction. Model shows Dashcam-equipped drivers are more likely to file a claim, supporting the finding from EDA.
 
 ---  
 
