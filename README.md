@@ -213,19 +213,19 @@ The raw dataset underwent extensive preprocessing to improve quality and ensure 
     <img width="737" height="612" alt="image" src="https://github.com/user-attachments/assets/da773ed9-7785-4b32-a2f6-06ef5699b748" />
 
 - **Numerical Variables:**
-  - 'ps_reg_03' and 'ps_car_14', 'ps_car_11', 'ps_car_12' seems MCAR type since the correlation coeffient in missing value heatmap is almost 0 , we will impute them with mean or medium based on their data distribution.
+  - 'ps_reg_03' and 'ps_car_14', 'ps_car_11', 'ps_car_12' seems **MCAR** since the correlation coeffient in missing value heatmap is almost 0, we will impute them with mean or medium based on their data distribution.
   - Median imputation was applied to these missing variables since they had skewed distributions.
 <img width="1201" height="593" alt="image" src="https://github.com/user-attachments/assets/c9d7197b-ff17-4978-bbc7-a348206e7d52" />
 
 
 - **Categorical Variables:**
-  -'ps_car_03_cat','ps_car_05_cat' had over 40% missing values, so we'll drop them first.
+  - 'ps_car_03_cat','ps_car_05_cat' had over 40% missing values, so we'll drop them first.
   - 'ps_car_07_cat','ps_ind_05_cat', 'ps_car_09_cat', 'ps_ind_02_cat', 'ps_car_01_cat', 'ps_ind_04_cat', we’ll keep -1 as a **separate category**, as EDA showed:
     - Missing values had **non-random patterns**
     - Their presence was predictive of **higher/lower claim risk**
   <img width="892" height="446" alt="image" src="https://github.com/user-attachments/assets/5baa9870-29e6-43cb-bb92-35c7bde048a5" />
 
-  -For the column 'ps_car_02_cat', it seems MCAR type, we'll **impute using the mode**.
+  - For the column 'ps_car_02_cat', it seems MCAR type, we'll **impute using the mode**.
 
 
 
