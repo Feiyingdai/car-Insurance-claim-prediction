@@ -67,8 +67,8 @@ The dataset contains rich, multi-dimensional features covering **driver profiles
 | `ps_ind_03`     | Driving experience (years) |
 | `ps_ind_04_cat` | Occupation risk level (e.g., white-collar, high-risk) |
 | `ps_ind_06_bin` | Prior accident history (0 = No, 1 = Yes) |
-| `ps_ind_07_bin` | Has Tesla dashcam installed (0/1) |
-| `ps_ind_16_bin` | Participated in Tesla safe driving training (0/1) |
+| `ps_ind_07_bin` | Has dashcam installed (0/1) |
+| `ps_ind_16_bin` | Participated in safe driving training (0/1) |
 
 ---
 
