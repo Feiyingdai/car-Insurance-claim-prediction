@@ -27,7 +27,7 @@ Predicting whether a driver will file a car insurance claim based on demographic
 
 ### Backgorund:
 
-In recent years, Tesla's intelligent systems and high performance have gained significant market traction. However, some models such as **Model Y and Cybertruck exhibit elevated claim frequencies and costs**, attracting attention from insurers and regulators. These trends are driven by:
+In recent years, Tesla's intelligent systems and high performance have gained significant market traction. However, some models such as **Model Y exhibits elevated claim frequencies and costs**, attracting attention from insurers and regulators. These trends are driven by:
 - High repair costs associated with intelligent systems
 - Complex Autopilot-related accident factors
 - Heterogeneous driver behaviors and vehicle usage scenarios
